@@ -1,7 +1,11 @@
 <?php 
-$self = "/todo/";
+// public path to this file
+$self = "/todo/index.php";
+// relative path to your taskpaper document
 $file = 'todo-txt.txt';
 
+
+// everything below can be left
 if(isset($_POST['todo']) && $_POST['todo'] != ''){
     $f = fopen('todo-txt.txt', 'w');
     fwrite($f, $_POST['todo']);
