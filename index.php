@@ -3,7 +3,8 @@
 $self = "/todo/index.php";
 // relative path to your taskpaper document
 $file = 'todo-txt.txt';
-
+// Display instructions
+$instructions = true;
 
 // everything below can be left
 if(isset($_POST['todo']) && $_POST['todo'] != ''){
@@ -174,10 +175,14 @@ strike {
 .instructions {
     display: block;
     width: 300px;
-    margin: 50px 0;
+    margin: 50px 0 20px 0;
     background: #ccf;
     border: 2px solid #77d;
     padding: 10px;
+}
+.footer {
+    color: #888;
+    padding: 30px 50px;
 }
 </style>
 <script type="text/javascript" src="/todo/jquery.js"></script>
@@ -293,12 +298,12 @@ echo get_marked_up_todo(file_get_contents($file));
 <input type="submit" value="Save">
 </div>
 <input type="hidden" id="currently" value="index">
-
+<?php if($instructions){ ?>
 <p class="instructions">
     You can double click on the main page to edit the content. 
     You can also click any context/tag to show you all the todo's 
     with that same context. You can click a projects heading to show
-    you just that project. Saving has been turned off in this 
-    demo to stop spam. <a href="http://e26.co.uk/mumblings/200708#05">
-    Related blog post</a>
+    you just that project.
 </p>
+<?php } ?>
+<p class="footer"><a href="http://taskpaper-web.googlecode.com">TaskPaper.Web</a> created by <a href="http://e26.co.uk/">Eddie Sowden</a>.</p>
