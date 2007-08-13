@@ -66,7 +66,8 @@ function get_marked_up_todo($todo){
 }
 
 function save($todo){
-    $f = fopen('todo-txt.txt', 'w');
+    global $file;
+    $f = fopen($file, 'w');
     fwrite($f, $todo);
     fclose($f);
     return $todo;
