@@ -193,7 +193,7 @@ strike {
     padding: 30px 50px;
 }
 </style>
-<script type="text/javascript" src="/todo/jquery.js"></script>
+<script type="text/javascript" src="./jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         add_events();
