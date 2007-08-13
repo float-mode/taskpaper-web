@@ -8,10 +8,7 @@ $instructions = true;
 
 // everything below can be left
 if(isset($_POST['todo']) && $_POST['todo'] != ''){
-    $f = fopen('todo-txt.txt', 'w');
-    fwrite($f, $_POST['todo']);
-    fclose($f);
-    echo get_marked_up_todo($_POST['todo']);
+    echo get_marked_up_todo(save($_POST['todo']));
     die();
 } else if(!empty($_GET['tag'])){
     $items = get_items_tagged($_GET['tag']);
@@ -35,7 +32,11 @@ if(isset($_POST['todo']) && $_POST['todo'] != ''){
     print "<a id=\"back\">&larr; Back</a>";
     die();
 } else if(!empty($_GET['toggle'])){
-    echo get_marked_up_todo(toggle_done($_GET['todo']));
+    $with_done = toggle_done($_GET['todo']);
+    $current = explode(":",$_GET['current']);
+    if($current[0] == "tag") header("Location: ".$self."?tag=".$current[1]);
+    if($current[0] == "title") header("Location: ".$self."?title=".$current[1].":");
+    echo get_marked_up_todo($with_done);
     die();
 } else if(!empty($_GET['ajax'])){
     echo get_marked_up_todo(file_get_contents($file));
@@ -64,6 +65,12 @@ function get_marked_up_todo($todo){
     return preg_replace($search, $replace, $todo);
 }
 
+function save($todo){
+    $f = fopen('todo-txt.txt', 'w');
+    fwrite($f, $todo);
+    fclose($f);
+    return $todo;
+}
 function get_items_tagged($tag){
     global $file;
     $todo = file_get_contents($file);
@@ -120,7 +127,7 @@ function toggle_done($item){
         }
     }
     $todo = implode("\n", $lines);
-    return $todo;
+    return save($todo);
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -227,18 +234,6 @@ strike {
                 );
             });
         });
-        $(".dates").each(function(){
-            $(this).click(function(){
-                current.val("/.tag:"+this.innerHTML);
-                $.get("<?=$self?>", 
-                    { tag: this.innerHTML },
-                    function(data){
-                        todoList.html(data);
-                        add_events();
-                    }
-                );
-            });
-        });
         $("h1").each(function(){
             $(this).click(function(){
                 current.val("title:"+this.innerHTML);
@@ -267,7 +262,7 @@ strike {
                 checkbox.attr({ checked: "checked"});
             checkbox.click(function(){
                 $.get("<?=$self?>", 
-                    { toggle: "true", todo: checkbox.val() },
+                    { toggle: "true", todo: checkbox.val(), current: current.val() },
                     function(data){
                         todoList.html(data);
                         add_events();
@@ -291,7 +286,7 @@ strike {
 <?php 
 echo get_marked_up_todo(file_get_contents($file));
 ?>
-  
+ 
 </div>
 <div id="edit">
 <textarea></textarea><br>
