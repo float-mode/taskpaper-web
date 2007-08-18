@@ -1,0 +1,70 @@
+* { padding: 0; margin: 0; }
+body {
+    font: 14px/18px helvetica,sans-serif;
+    text-align: center;
+	background: #f9f9f9;
+}
+#wrapper {
+	background: #fff;
+	width: 380px;
+	margin: 0 auto;
+	border: 1px solid #999;
+	border-top: 0;
+	text-align: left;
+}
+#todo_list {
+	padding: 0 10px;
+}
+h1 {
+    font: 2em "Baskerville","Garamond","Caslon",georgia,serif;
+    margin: 20px 0 0 30px;
+}
+h1:hover {
+    cursor: pointer;
+}
+.tag {
+    color: #77d;
+}
+.tag:hover {
+    color: #99f;
+    cursor: pointer;
+}
+.todo {
+    display: block;
+    padding-left: .2em;
+}
+.note {
+    padding: 0 0 0 40px;
+    color: #777;
+}
+strike {
+    color: #999;
+}
+#menu {
+	border-bottom: 1px solid #999;
+	padding: 5px 20px;
+}
+#edit_back {
+	margin-right: 20px;
+}
+#edit {
+    display: none;
+	margin: 20px;
+}
+#edit textarea {
+    font: 14px helvetica,sans-serif;
+    width: 300px;
+    height: 300px;
+    border: 1px solid;
+    padding: 3px;
+}
+.instructions {
+    display: block;
+    margin: 50px 20px 20px 20px;
+    background: #ccf;
+    border: 2px solid #77d;
+    padding: 10px;
+}
+.footer {
+    padding: 30px 50px;
+}
