@@ -35,14 +35,6 @@ echo get_marked_up_todo(file_get_contents($file));
     <input type="submit" value="Save">
 </div>
 <input type="hidden" id="currently" value="index">
-<?php if($instructions){ ?>
-<p class="instructions">
-    You can double click on the main page to edit the content. 
-    You can also click any context/tag to show you all the todo's 
-    with that same context. You can click a projects heading to show
-    you just that project.
-</p>
-<?php } ?>
 </div>
 <p class="footer"><a href="http://taskpaper-web.googlecode.com">TaskPaper.Web</a> created by <a href="http://e26.co.uk/">Eddie Sowden</a>.</p>
 </body>
