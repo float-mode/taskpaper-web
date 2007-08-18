@@ -58,13 +58,6 @@ strike {
     border: 1px solid;
     padding: 3px;
 }
-.instructions {
-    display: block;
-    margin: 50px 20px 20px 20px;
-    background: #ccf;
-    border: 2px solid #77d;
-    padding: 10px;
-}
 .footer {
     padding: 30px 50px;
 }
