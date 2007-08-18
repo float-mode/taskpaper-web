@@ -94,7 +94,7 @@ function add_events(){
     })
     $("#project_select").change(function(){
         if($(this).val() != ''){
-            current.val("title:"+this.innerHTML);
+            current.val("title:"+$(this).val());
             $.get("<?=$self?>", 
                 { title: $(this).val() },
                 function(data){
