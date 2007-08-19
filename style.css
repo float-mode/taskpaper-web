@@ -2,13 +2,13 @@
 body {
     font: 14px/18px helvetica,sans-serif;
     text-align: center;
-	background: #f9f9f9;
+	background: #d9d9f9;
 }
 #wrapper {
 	background: #fff;
 	width: 450px;
 	margin: 0 auto;
-	border: 1px solid #999;
+	border: 1px solid #555;
 	padding-bottom: 20px;
 	border-top: 0;
 	text-align: left;
@@ -42,7 +42,8 @@ strike {
     color: #999;
 }
 #menu {
-	border-bottom: 1px solid #999;
+	background: #fff url(menu.png) bottom left repeat-x;
+	border-bottom: 1px solid #555;
 	padding: 5px 20px;
 }
 #edit_back {
