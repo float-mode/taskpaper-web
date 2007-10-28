@@ -25,8 +25,11 @@ function get_marked_up_todo($todo){
 }
 
 function save($todo){
-    global $file;
+    global $file,$webdav;
     $todo = stripslashes($todo);
+    if($webdav){
+        chmod($file, 0777);
+    }
     $f = fopen($file, 'w');
     fwrite($f, $todo);
     fclose($f);

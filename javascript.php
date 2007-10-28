@@ -23,7 +23,12 @@ function add_events(){
         $(this).unbind();
         if(current.val() == 'index'){
             current.val('index:edit');
-            editArea.load("<?=$file?>?"+Math.random());
+            $.get("<?=$self?>", 
+                { plain: "true", time: "Math.random()" },
+                function(data){
+                    editArea.html(data);
+                }
+            );
             todoList.hide();
             edit.show();
         } else {
