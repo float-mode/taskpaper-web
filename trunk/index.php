@@ -36,6 +36,6 @@ echo get_marked_up_todo(file_get_contents($file));
 </div>
 <input type="hidden" id="currently" value="index">
 </div>
-<p class="footer"><a href="http://taskpaper-web.googlecode.com">TaskPaper.Web</a> created by <a href="http://e26.co.uk/">Eddie Sowden</a>.</p>
+<p class="footer"><a href="http://taskpaper-web.googlecode.com">TaskPaper.Web</a> created by <a href="http://e26.co.uk/">Edd Sowden</a>.</p>
 </body>
 </html>
