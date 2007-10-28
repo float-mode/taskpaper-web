@@ -3,6 +3,8 @@ include('./functions.php');
 
 if(isset($_POST['todo']) && $_POST['todo'] != ''){
     echo get_marked_up_todo(save($_POST['todo']));
+} else if(!empty($_GET['plain'])){
+    echo file_get_contents($file);
 } else if(!empty($_GET['tag'])){
     $items = get_items_tagged($_GET['tag']);
     print "<h1>".$_GET['tag']."</h1>\n";
