@@ -26,7 +26,7 @@ function add_events(){
             $.get("<?=$self?>", 
                 { plain: "true", time: "Math.random()" },
                 function(data){
-                    editArea.html(data);
+                    editArea.val(data);
                 }
             );
             todoList.hide();

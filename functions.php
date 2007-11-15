@@ -27,9 +27,6 @@ function get_marked_up_todo($todo){
 function save($todo){
     global $file,$webdav;
     $todo = stripslashes($todo);
-    if($webdav){
-        chmod($file, 0777);
-    }
     $f = fopen($file, 'w');
     fwrite($f, $todo);
     fclose($f);
@@ -103,5 +100,25 @@ function toggle_done($item){
     }
     $todo = implode("\n", $lines);
     return save($todo);
+}
+function get_errors(){
+    global $self, $file, $auto_writable;
+    if(!file_exists($_SERVER["DOCUMENT_ROOT"].substr($self, 1))){
+        $error = "Can't find ajax file. You may need to set its location in settings.php";
+    } else if(!file_exists('./'.$file)){
+        $error = "Can't find your taskpaper document. You may need to set its location in settings.php";
+    } else if(is_writable('./'.$file)){
+        if($auto_writable && copy($file, $file.".tmp")){
+            unlink($file);
+            copy($file.".tmp", $file);
+            unlink($file.".tmp");
+            chmod($file, 0777);
+        } else {
+            $error = "Your taskpaper document is not writable so you will be unable to save chnages";
+        }
+    }
+    if(isset($error))
+         return '<div class="error"><img src="error.png"> '.$error.'</div>';
+    return '';
 }
 ?>
