@@ -12,6 +12,7 @@ include('./functions.php');
 </head>
 <body>
 <div id="wrapper">
+<?=get_errors()?>
 <div id="menu">
     <input type="button" id="edit_back" value="Edit"> 
     <select id="project_select">

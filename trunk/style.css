@@ -46,6 +46,10 @@ strike {
     border-bottom: 1px solid #555;
     padding: 5px 20px;
 }
+.error {
+	background: #f9d9d9;
+	padding: 5px;	
+}
 #edit_back {
     margin-right: 20px;
 }
