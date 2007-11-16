@@ -103,7 +103,7 @@ function toggle_done($item){
 }
 function get_errors(){
     global $self, $file, $auto_writable;
-    if(!file_exists($_SERVER["DOCUMENT_ROOT"].substr($self, 1))){
+    if(!file_exists($self)){
         $error = "Can't find ajax file. You may need to set its location in settings.php";
     } else if(!file_exists('./'.$file)){
         $error = "Can't find your taskpaper document. You may need to set its location in settings.php";
