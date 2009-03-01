@@ -1,0 +1,295 @@
+/* CSS Style based on TaskPaper "Standard" theme */
+
+body
+{
+    background: #637187;
+}
+
+/* Toolbar */
+
+#toolbar_left
+{
+	margin: 0 0 0 10%;
+	padding:0;
+	background: url("../img/toolbar_left.png") no-repeat left;
+	height: 74px;
+}
+
+#toolbar_right
+{
+	margin: 0 10% 0 0;
+	padding:0;
+	background: url("../img/toolbar_right.png") no-repeat right;
+	height: 74px;
+}
+
+#toolbar
+{
+	margin: 0 40px;
+	background: #fff;
+	text-align: left;
+	background: url(../img/toolbar.png) repeat-x right;
+	height: 74px;
+}
+
+#paper_icon
+{
+	background: url(../img/document_icon.png) no-repeat center center;
+	height: 16px;
+	display: inline-block;
+	width: 16px;
+	vertical-align: middle;
+}
+
+#paper_name
+{
+	text-align: center;
+	color: #000;
+	font: 13px "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-bottom: 8px;
+	padding-top: 24px;
+	display: block;
+	height: 16px;
+}
+
+/* Paper */
+
+#content_left
+{
+	margin: 0 0 0 10%;
+	padding:0;
+	background: url("../img/shadow_left.png") top left repeat-y;
+}
+
+#content_right
+{
+	margin: 0 10% 0 0;
+	padding:0;
+	background: url("../img/shadow_right.png") top right repeat-y;
+}
+
+#content
+{
+	margin:0 40px;
+	background: #fff;
+	text-align: left;
+	padding-bottom: 20px;
+}
+
+#task_list
+{
+    padding: 4px 3px 0;
+}
+
+.project_widget,
+.project_widget_back
+{
+	background: url(../img/project_arrow.png) no-repeat left center;
+	display: inline;
+	float: left;
+	height:  17px;
+	width: 17px;
+	margin-top: 6px;
+}
+
+.project_widget:hover,
+.project_widget_back:hover
+{
+    cursor: pointer;
+    background: url(../img/project_arrow_over.png) no-repeat left center;
+}
+
+.project_widget:active
+{
+    background: url(../img/project_arrow_back_over.png) no-repeat left center;
+}
+
+
+.project_widget_back
+{
+	background: url(../img/project_arrow_back.png) no-repeat left center;
+}
+
+.project_widget_back:hover
+{
+    background: url(../img/project_arrow_back_over.png) no-repeat left center;
+}
+
+.project_name
+{
+    font: bold 16px Helvetica, Arial, Geneva, sans-serif;
+	text-indent: 5px;
+	display: block;
+	padding: 6px 0 12px;
+}
+
+
+.project_seperator
+{
+	background: url(../img/project_seperator.png) no-repeat left center;
+	margin-left: 20px;
+	width: 100%;
+	height: 1px;
+	display: block;
+	margin-top: 11px;
+	margin-bottom: 4px;
+}
+
+.project
+{
+	display: block;
+}
+
+.at
+{
+	color: #999
+}
+
+.tag
+{
+    color: #999;
+	text-decoration: underline;
+}
+.tag:hover
+{
+    cursor: pointer;
+}
+
+.task_widget
+{
+	background: url(../img/task_dash.png) no-repeat left center;
+	display: inline;
+	float: left;
+	height:  12px;
+	width: 18px;
+	margin-left: 30px;
+	margin-right: 4px;
+}
+
+.task_widget:hover
+{
+    cursor: pointer;
+    background: url(../img/task_dash_over.png) no-repeat left center;
+}
+
+.task
+{
+    display: inline;
+    font: 12px/14px Helvetica, Arial, Geneva, sans-serif;
+}
+
+.note_widget
+{
+	background: url(../img/note_bullet.png) no-repeat left center;
+	display: inline;
+	float: left;
+	height:  12px;
+	width: 18px;
+	margin-left: 30px;
+	margin-right: 4px;
+}
+
+.note_widget:hover
+{
+    cursor: pointer;
+    background: url(../img/note_bullet_over.png) no-repeat left center;
+}
+
+.note
+{
+    display: inline;
+    font: 12px Helvetica, Arial, Geneva, sans-serif;
+	color: #999;
+}
+
+.done
+{
+	text-decoration: line-through;
+}
+
+.tab
+{
+	margin-right: 12px;
+	float: left;
+}
+
+/* Editor */
+
+#edit_back
+{
+    margin-right: 20px;
+	margin-left: 20px;
+}
+
+#edit
+{
+    display: none;
+	padding-top: 20px;
+	margin-top: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#edit textarea
+{
+    font: 14px helvetica,sans-serif;
+    width: 400px;
+    height: 300px;
+    border: 1px solid;
+    padding: 3px;
+	margin-bottom: 5px;
+}
+
+/* Footer */
+
+#footer_left
+{
+	margin: 0 0 0 10%;
+	padding:0;
+	background: url("../img/footer_left.png") no-repeat left top;
+	height: 50px;
+}
+
+#footer_right
+{
+	margin: 0 10% 0 0;
+	padding:0;
+	background: url("../img/footer_right.png") no-repeat right;
+	height: 50px;
+}
+
+#footer_wrapper
+{
+	background: url(../img/footer.png) repeat-x right;
+	text-align: center;
+	margin: 0 56px 10px;
+	height: 50px;
+}
+
+#footer
+{
+	padding-top: 30px;
+}
+
+/* Credits */
+
+.credit,
+a.credit:link
+{
+	color: #333;
+	font: 9px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+a.credit:link
+{
+	color: #000;
+	text-decoration: none;
+}
+
+a.credit:hover
+{
+	color: #000;
+	text-decoration: none;
+	background-color: #ccc;
+}
+

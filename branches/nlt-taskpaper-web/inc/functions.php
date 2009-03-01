@@ -2,11 +2,12 @@
 include('./settings.php');
 
 
-function get_marked_up_todo($todo){
-    $todo = htmlspecialchars($todo,ENT_QUOTES)."\n\n";
-    $search = array('/(.+:)(.+)\n\n/sU',     // Get projects
+function get_marked_up_todo($project){
+    $todo = htmlspecialchars($project,ENT_QUOTES)."\n\n";
+    $search = array(//'/(.+:)(.+)\n\n/sU',     // Get projects
+    				'/(.+:\n)/sU',
                     '/(- ([^\@\n]+).+)/',    // Get todos
-                    '/(.+:)/',               // Get headings
+                    '/(.+:\n)/',               // Get headings
                     '/\n([^\<\n].+)/',       // Get notes
                     '/- (.+@done)/',         // Get done
                     '/(@due\([^\)]+\))/',    // Get due tags
@@ -21,7 +22,13 @@ function get_marked_up_todo($todo){
                     '<span class="tag">\1</span>',
                     );
 
-    return preg_replace($search, $replace, $todo);
+	if(is_array($project)) {
+		$html = "<div class=\"project\">\n" . key($project) . "\n</div>\n\n";
+	
+		return $html;
+	}
+
+    return preg_replace($search, $replace, $project);
 }
 
 function save($todo){
@@ -63,28 +70,41 @@ function get_items_due($days, $inclusive=0){
     }
     return $todos;
 }
+
 function get_project($title){
     global $file;
-    $todo = file_get_contents($file);
-    $todo_list = explode("\n\n", $todo);
-    foreach($todo_list as $project){
-        preg_match('/(.+:)/',$project,$t);
-        if($title == $t[0])
-            return $project;
+    //$todo = file_get_contents($file);
+	$todo_list = explode("\n\n", $todo);
+	
+	
+	$todo_list = file($file);
+	
+    foreach($todo_list as $line) {
+    	if(preg_match('/(.+:\n)/',$line,$t)) {
+    		$project = substr_replace($t[0],"",-1);
+    		$project_list[$project] = array();
+    	}
+    	else {
+    		$project_list[$project][] = $line;
+    	}
     }
-    return "";
+    
+   // print $title; exit;
+    print_r($project_list["$title"]); exit;
+    return $project_list[$title];
 }
+
 function get_projects_list(){
     global $file;
-    $todo = file_get_contents($file);
-    $todo_list = explode("\n\n", $todo);
-    $project_list = array();
-    foreach($todo_list as $project){
-       preg_match('/(.+:)/',$project,$t);
-       $project_list[] = $t[0];
+    $todo_list = file($file);
+    foreach($todo_list as $line) {
+		if(preg_match('/(.+):\n/',$line,$t))
+			$project_list[] = $t[0];
     }
-    return $project_list;
+	
+	return $project_list;
 }
+
 function toggle_done($item){
     global $file;
     $todo = file_get_contents($file);
