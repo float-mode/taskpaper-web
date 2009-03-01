@@ -3,7 +3,7 @@
 	require_once(INC_DIR . 'includes.inc.php');
 	
 	// Create a TaskPaper object.
-	$taskpaper = new TaskPaperWeb($cfg_taskPapers[0]);
+	$taskpaper = new TaskPaperWeb($cfg_taskPapers[0]); // <------- handle the array
 
 	// Handle "ajax" (javascript) requests.
 	if(isset($_POST['task']) && $_POST['task'] != '')
@@ -34,13 +34,12 @@
 	}
 	else if(!empty($_GET['title']))
 	{
-		print "Made it!!";
 		$project_html = $taskpaper->GetProjectHTML($_GET['title'],true);
-		// Make sure the title value got is good by making sure project html output is good.
+		// Make sure the title value we got is good by checking GetProjectHTML result.
 		if(false !== $project_html)
 			print $project_html;
-		else
-			include(INC_DIR . 'index.inc.php');
+		//else
+			//GetError?????????????
 	}
 	else if(!empty($_GET['toggle']))
 	{

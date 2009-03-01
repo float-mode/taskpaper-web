@@ -2,9 +2,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
+<!--
 	<meta name="viewport" content="width=device-width, user-scalable=yes" />
 	<meta name="format-detection" content="telephone=no" />
-
+-->
     <title><?php echo TITLE ?></title>
     <link rel="stylesheet" type="text/css" href="thm/<?php echo $cfg_theme ?>/css/style.css" />
     <script type="text/javascript" src="js/jquery.js"></script>

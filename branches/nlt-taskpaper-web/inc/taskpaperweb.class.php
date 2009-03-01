@@ -80,6 +80,7 @@
 			$project_list_html = "";
 			foreach($this->_buildProjectList() as $project)
 			{
+				$project = htmlspecialchars($project,ENT_QUOTES);
 				$project_list_html .= "\t\t<option value=\"$project\">$project</option>\n";
 			}
 			return $project_list_html;
@@ -149,17 +150,40 @@
 		// ToggleDoneState($in_line)
 		function ToggleDoneState($in_line)
 		{
-			$in_line = $this->_cleanLine($in_line);			
+			global $cfg_addDateToDone;
+			
+			// Clean up the line we get in case it has had html special
+			// characters encoded or had slashes added to escape quotes.
+			$in_line = $this->_cleanLine($in_line);	
+			
+			// Looping through all the projects and all the lines in a project...
 			foreach($this->taskpaper as $project => $lines)
 			{
 				foreach($lines as $key => $value)
 				{
 					if(false !== strpos($value,$in_line))
 					{
+						// ...find the line that matches ours 
+						// and apply or remove a @done tag as needed.
 						if(false !== strpos($value,DONE_TAG))
-							$this->taskpaper[$project][$key] = str_replace(' '.DONE_TAG,"",$value);
+						{
+							// We've found a @done tag so we need to remove it.
+							//$this->taskpaper[$project][$key] = str_replace(' '.DONE_TAG,"",$value);
+							$this->taskpaper[$project][$key] = preg_replace('/ '.RE_DONE_TAG.'/',"",$value);
+						}
 						else
-							$this->taskpaper[$project][$key] .= ' ' . DONE_TAG;
+						{
+							// The was no done tag so we'll add one.
+							$done_tag = DONE_TAG;
+							if($cfg_addDateToDone)
+							{
+								// Add a date to the done tag per the config file.
+								// The recommended date format for TaskPaper is YYYY-MM-DD, where
+								// YYYY’s are for year, MM’s are for month, and DD’s are for day.
+								$done_tag .= "(" . date("Y/m/d") . ")";
+							}
+							$this->taskpaper[$project][$key] .= ' ' . $done_tag;
+						}
 					}
 				}
 			}
