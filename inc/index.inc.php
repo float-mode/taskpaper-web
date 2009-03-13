@@ -9,6 +9,7 @@
     <title><?php echo TITLE ?></title>
     <link rel="stylesheet" type="text/css" href="thm/<?php echo $cfg_theme ?>/css/style.css" />
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/editinplace.js"></script>
     <script type="text/javascript" src="js/taskpaperweb.js"></script>
 </head>
 <body>
@@ -26,6 +27,11 @@
     		<select id="project_select">
         		<option disabled="disabled" value=''>Go to Project...</option>
 				<?php print $taskpaper->GetProjectListHTML() ?>
+			</select>
+			
+			<select id="tag_select">
+				<option disabled="disabled" value=''>Go to Tag...</option>
+				<?php //print $taskpaper->GetTagListHTML() ?>
 			</select>
 		</div>
 		

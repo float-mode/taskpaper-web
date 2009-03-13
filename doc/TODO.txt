@@ -1,0 +1,9 @@
+Hide/Show toolbar?
+edit in place (nearing completion)
+quick entry window
+'Go to tag...' menu
+new project/task/note menu?
+nice text editor
+error check, error check,
+minify javascripts (possibly into one file?)
+documentation!!!
