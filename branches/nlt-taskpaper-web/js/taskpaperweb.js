@@ -1,20 +1,46 @@
 
-// JSLint global declaration for jQuery shorthand $ and doc.
-/*global $ document */
+// JSLint (http://www.JSLint.com/) 
+// global declaration for jQuery shorthand $ and doc.
+/*global $ document url */
 
-function fn_loadTaskList(data)
+
+function fn_loadItem(item,data,status)
+{
+	// Load html for the specified item
+	// as long as the request was successful.
+	if(status == "success")
+	{
+		item.innerHTML = data;
+	}
+}
+
+function fn_submitEdit(item)
+{
+	// Need a value here "before" the change so we can know what to change on the backend.
+	// This is a good reason for "project" objects and "task," and "note" objects!!!! <--------------HERE HAVE FUN :-)
+	
+	$.post(url,{action: "edit", item: item.id, value: item.innerHTML},
+		function(data,status){fn_loadItem(item,data,status);});
+}
+
+function fn_loadTaskList(data,status)
 {
 	// Load the new html we receive in the task_list div.
-	$("#task_list").html(data);
+	// but only if the request is successful.
+	if(status == "success")
+	{
+		$("#task_list").html(data);
+	}
+	$(".editable").editable(function(item){fn_submitEdit(item);});
 }
 
 function fn_projMenuChanged(e)
 {
-	if(this.value != '')
+	if(this.value !== '')
 	{
 		var curView = $("#view");
-		curView.val("title:"+this.value);
-		$.get(".",{title:this.value},fn_loadTaskList);
+		curView.val("proj:"+this.value);
+		$.get(url,{action: "proj", proj: this.value},fn_loadTaskList);
 		this.selectedIndex = 0;
 	}
 }
@@ -25,25 +51,22 @@ function fn_projWidgetClicked(e)
 	
 	if(curView.val() == "index")
 	{
-		curView.val("title:"+this.title);
-		$.get(".",{title:this.title},fn_loadTaskList);
+		// Send the id of the line that was clicked. It contains
+		// the "item" that was click and the location of the line.
+		// The format is a:X:Y. See defines.inc.php "Line IDs" for more info.
+		curView.val("proj:"+this.id);
+		$.get(url,{action: "proj",proj: this.id},fn_loadTaskList);
 	}
 	else
 	{
 		curView.val("index");
-		$.get(".",{ajax:"true"},fn_loadTaskList);
+		$.get(url,{action: "ajax"},fn_loadTaskList);
 	}
-}
-
-function fn_projNameDblClicked(e)
-{
-	// Make a line editable.
-
 }
 
 function fn_taskOrNoteWidgetClicked()
 {
-	$.get(".",{toggle:this.title,view:$("#view").val()},fn_loadTaskList);
+	$.get(url,{action: "toggle" ,item: this.id,view: $("#view").val()},fn_loadTaskList);
 }
 
 function fn_eventBinder()
@@ -52,9 +75,10 @@ function fn_eventBinder()
 	$(".project_widget").live("click",fn_projWidgetClicked);
 	$(".project_widget_back").live("click",fn_projWidgetClicked);
 	$("#project_select").bind("change",fn_projMenuChanged);
-	$(".project_name").live("dblclick",fn_projNameDblClicked);
 	$(".task_widget").live("click",fn_taskOrNoteWidgetClicked);
 	$(".note_widget").live("click",fn_taskOrNoteWidgetClicked);
+	$(".editable").editable(function(item){fn_submitEdit(item);});
 }
 
+var url = "index.php";
 $(document).ready(fn_eventBinder);
