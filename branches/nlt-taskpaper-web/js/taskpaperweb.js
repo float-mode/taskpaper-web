@@ -16,9 +16,6 @@ function fn_loadItem(item,data,status)
 
 function fn_submitEdit(item)
 {
-	// Need a value here "before" the change so we can know what to change on the backend.
-	// This is a good reason for "project" objects and "task," and "note" objects!!!! <--------------HERE HAVE FUN :-)
-	
 	$.post(url,{action: "edit", item: item.id, value: item.innerHTML},
 		function(data,status){fn_loadItem(item,data,status);});
 }
@@ -31,6 +28,7 @@ function fn_loadTaskList(data,status)
 	{
 		$("#task_list").html(data);
 	}
+	// Activate "editable" again.
 	$(".editable").editable(function(item){fn_submitEdit(item);});
 }
 

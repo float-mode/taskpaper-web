@@ -9,9 +9,13 @@
 	
 	$action = "";
 	if(isset($_POST['action']) && $_POST['action'] != '')
+	{
 		$action = $_POST['action'];
+	}
 	elseif(!empty($_GET['action']))
+	{
 		$action = $_GET['action'];
+	}
 	
 	// Handle ajax requests.
 	switch($action)
@@ -34,7 +38,10 @@
 				//GetError?????????????
 			break;
 		case act_TOGGLE_DONE :
-			$taskpaper->ToggleDoneState($_GET['item']);
+			// Config flag specifies if we add a date value to done tags.
+			global $cfg_addDateToDone;
+
+			$taskpaper->ToggleDoneState($_GET['item'],$cfg_addDateToDone);
 			$view = explode(":",$_GET['view']);
 			// After explosion we should have the following structure:
 			// [0] view name

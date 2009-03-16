@@ -1,6 +1,6 @@
 <?php
-	// We'll need the tpwproject class.
-	require_once(INC_DIR . 'tpwproject.class.php');
+	// We require tpwproject.class.php - included in includes.inc.php.
+	// We rely on the global defines - in defines.inc.php
 	
 	class TaskPaperWeb
 	{
@@ -168,16 +168,17 @@
 		} // end function GetTaskpaperName()
 		
 				
-		// ToggleDoneState($in_line)
-		function ToggleDoneState($in_id)
+		// ToggleDoneState($in_line,$in_should_add_date = false)
+		function ToggleDoneState($in_id,$in_should_add_date = false)
 		{
+			
 			$line_info = explode(":",$in_id);
 			// After explosion we should have the following structure:
 			$line_id = $line_info[0];		// [0] line ID
 			$project_key = $line_info[1];	// [1] project key
 			$line_key = $line_info[2];		// [2] line key
 			
-			if($this->taskpaper[$project_key]->toggleDoneState($line_key))
+			if($this->taskpaper[$project_key]->toggleDoneState($line_key,$in_should_add_date))
 			{
 				// Have to update our raw version since we changed a line!
 				$this->_updateRawData();
@@ -185,7 +186,7 @@
 				// Then save the changes out to the file
 				$this->SaveTaskPaper();
 			}
-		} // end function ToggleDoneState($in_line)
+		} // end function ToggleDoneState($in_line,$in_should_add_date = false)
 		
 		
 // --------------------------------------- Private Functions -------------------------------------// 
