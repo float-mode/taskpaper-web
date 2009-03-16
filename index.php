@@ -55,7 +55,8 @@
 			}
 			elseif($view[0] == "proj")
 			{
-				header("Location: ?action=proj&proj=".$view[2].":".$view[3]);
+				$projectInfo = $view[1].":".$view[2].":".$view[3]; // pw:1:2, etc...
+				header("Location: ?action=proj&proj=$projectInfo");
 				print $taskpaper->GetProjectHTML($view[2],true);
 			}
 			else
